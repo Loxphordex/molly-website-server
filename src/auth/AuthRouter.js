@@ -6,6 +6,12 @@ const path = require('path');
 
 AuthRouter
   .route('/register')
+  .get((req, res) => {
+    return res.status(200).json({ message: 'Connected to /register' });
+  });
+
+AuthRouter
+  .route('/register')
   .post(bodyParser, (req, res, next) => {
     const { username, password } = req.body;
 
