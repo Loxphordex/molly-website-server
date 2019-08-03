@@ -40,4 +40,43 @@ AuthRouter
       .catch(next);
   });
 
+AuthRouter
+  .route('/login')
+  .post(bodyParser, (req, res, next) => {
+    const { username, password } = req.body;
+    const userCreds = { username, password };
+
+    for (const [key, value] of Object.entries(userCreds)) {
+      if (!value) {
+        return res.status(400).json(
+          { error: `Missing ${key} in request body` }
+        );
+      }
+    }
+
+    AuthServices.getUserWithUsername(req.app.get('db'), userCreds.username)
+      .then(dbUser => {
+        if (!dbUser) {
+          return res.status(400).json({ error: 'Incorrect username or password' });
+        }
+        return AuthServices.comparePasswords(userCreds.password, dbUser.password)
+          .then(match => {
+            if (!match) {
+              return res.status(400).json({ error: 'Incorrect username or password' });
+            }
+
+            const subject = dbUser.username;
+            const payload = { user_id: dbUser.id };
+
+            res.send({
+              authToken: AuthServices.createJwt(subject, payload)
+            });
+          })
+          .catch(err => {
+            console.error(err);
+            next();
+          });
+      });
+  });
+
 module.exports = AuthRouter;
