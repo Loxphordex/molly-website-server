@@ -1,11 +1,10 @@
-'use strict';
-
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const AuthRouter = require('./auth/AuthRouter');
 
 const app = express();
 
@@ -20,6 +19,8 @@ app.use(helmet());
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
+
+app.use('/api/auth', AuthRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
