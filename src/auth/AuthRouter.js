@@ -10,6 +10,8 @@ AuthRouter
     return res.status(200).json({ message: 'Connected to /register' });
   });
 
+//comment
+
 AuthRouter
   .route('/register')
   .post(bodyParser, (req, res, next) => {
