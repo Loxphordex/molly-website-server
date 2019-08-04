@@ -20,4 +20,6 @@ ImagesRouter
 
         return res.status(200).json({ images });
       });
-  })
+  });
+
+module.exports = ImagesRouter;
