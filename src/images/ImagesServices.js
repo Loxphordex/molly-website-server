@@ -8,7 +8,8 @@ const ImagesServices = {
   getAllByCategory(db, category) {
     return db('images')
       .select('*')
-      .where('images.category', category);
+      .where('images.category', category)
+      .orderBy('id');
   },
   renameImage(db, id, newName) {
     return db('images')

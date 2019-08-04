@@ -23,7 +23,6 @@ ImagesRouter
       });
   })
   .patch(requireAuth, (req, res, next) => {
-    console.log('REQ QUERY: ', req.query);
     const { id, name } = req.query;
 
     if (!id) {
