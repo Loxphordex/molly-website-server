@@ -1,5 +1,3 @@
-BEGIN;
-
 INSERT INTO images (category, url, name)
   VALUES 
     ('pencil', 'https://res.cloudinary.com/dghqlm5xb/image/upload/v1561859393/Molly%20Art/28115499110_2a7cf572ae_o_ljznxz.jpg', 'flow'),
@@ -71,6 +69,3 @@ INSERT INTO images (category, url, name)
     ('alt. mediums', 'https://res.cloudinary.com/dghqlm5xb/image/upload/v1561859606/Molly%20Art/43775503831_9436148721_o_v6qv0k.jpg', 'rocks 1'),
     ('alt. mediums', 'https://res.cloudinary.com/dghqlm5xb/image/upload/v1561859605/Molly%20Art/43059167424_2d813f8d0b_o_ckmaul.jpg', 'rocks 2'),
     ('alt. mediums', 'https://res.cloudinary.com/dghqlm5xb/image/upload/v1561859477/Molly%20Art/29736984981_39f5f80031_o_ilh59x.jpg', 'Paper Affair');
-
-
-COMMIT;
