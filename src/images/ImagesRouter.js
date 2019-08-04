@@ -2,6 +2,7 @@ const express = require('express');
 const ImagesRouter = express.Router();
 const bodyParser = express.json();
 const ImagesServices = require('./ImagesServices');
+const requireAuth = require('../middleware/jwt-auth');
 
 ImagesRouter
   .route('/')
@@ -21,7 +22,7 @@ ImagesRouter
         return res.status(200).json({ images });
       });
   })
-  .patch((req, res, next) => {
+  .patch(requireAuth, (req, res, next) => {
     console.log('REQ QUERY: ', req.query);
     const { id, name } = req.query;
 
