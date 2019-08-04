@@ -6,7 +6,7 @@ const ImagesServices = require('./ImagesServices');
 ImagesRouter
   .route('/')
   .get((req, res) => {
-    const { category } = req.body;
+    const { category } = req.query;
 
     if (!category) {
       return res.status(400).json({ error: 'Missing category in request body' });
