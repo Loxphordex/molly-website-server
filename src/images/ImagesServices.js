@@ -9,7 +9,7 @@ const ImagesServices = {
     return db('images')
       .select('*')
       .where('images.category', category)
-      .orderBy('id');
+      .orderBy('id', 'desc');
   },
   insertImage(db, newImage) {
     return db
