@@ -63,6 +63,7 @@ ImagesRouter
   })
   .delete(requireAuth, (req, res, next) => {
     const { id } = req.query;
+    console.log('ID: ', id);
 
     if (!id) {
       return res.status(400).json({ error: 'Missing ID in request query' });
