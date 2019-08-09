@@ -32,8 +32,8 @@ const ImagesServices = {
   },
   deleteImage(db, id) {
     return db('images')
-      .where('images.id', id)
       .del()
+      .where({ id })
       .returning(id);
   }
 };
