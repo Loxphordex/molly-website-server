@@ -30,6 +30,17 @@ const ImagesServices = {
       .then(([ image ]) => image)
       .then(image => ImagesServices.getById(db, image.id));
   },
+  alterYear(db, id, newYear) {
+    return db('images')
+      .where('images.id', id)
+      .update({
+        year: newYear,
+        thisKeyIsSkipped: undefined
+      })
+      .returning('*')
+      .then(([ image ]) => image)
+      .then(image => ImagesServices.getById(db, image.id))
+  },
   deleteImage(db, id) {
     return db('images')
       .select('*')

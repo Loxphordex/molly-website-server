@@ -42,28 +42,46 @@ ImagesRouter
       .catch(next);
   })
   .patch(requireAuth, (req, res, next) => {
-    const { id, name } = req.query;
+    const { id, name, year } = req.query;
 
     if (!id) {
       return res.status(400).json({ error: 'Missing ID in request query' });
     }
-    if (!name) {
-      return res.status(400).json({ error: 'Missing name in request query' });
+    if (!name && !year) {
+      return res.status(400).json({ error: 'Missing name and year in request query' });
     }
 
-    ImagesServices.renameImage(req.app.get('db'), id, name)
-      .then(image => {
-        if (!image) {
-          return res.status(400).json({ error: `Image with name ${name} and id ${id} does not exist` });
-        }
+    let resImage = {};
 
-        return res.status(200).json({ image });
-      })
-      .catch(next);
+    if (name) {
+      ImagesServices.renameImage(req.app.get('db'), id, name)
+        .then(image => {
+          if (!image) {
+            return res.status(400).json({ error: `Image with name ${name} and id ${id} does not exist` });
+          }
+  
+          resImage = image;
+        })
+        .catch(next);
+    }
+
+    if (year) {
+      ImagesServices.alterYear(req.app.get('db'), id, year)
+        .then(image => {
+          if (!image) {
+            return res.status(400).json({ error: `Image with name ${name} and id ${id} does not exist` });
+          }
+
+          resImage = image;
+        })
+        .catch(next);
+    }
+
+    return res.status(200).json({ resImage });
+
   })
   .delete(requireAuth, (req, res, next) => {
     const { id } = req.query;
-    console.log('ID: ', id);
 
     if (!id) {
       return res.status(400).json({ error: 'Missing ID in request query' });
