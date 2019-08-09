@@ -32,7 +32,7 @@ const ImagesServices = {
   },
   deleteImage(db, id) {
     return db('images')
-      .where('id', id)
+      .where('images.id', id)
       .del()
       .returning(id);
   }
