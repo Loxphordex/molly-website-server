@@ -31,10 +31,9 @@ const ImagesServices = {
       .then(image => ImagesServices.getById(db, image.id));
   },
   deleteImage(db, id) {
-    return db
-      .into('images')
-      .del()
+    return db('images')
       .where('id', id)
+      .del()
       .returning(id);
   }
 };
