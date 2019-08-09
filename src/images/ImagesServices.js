@@ -35,7 +35,7 @@ const ImagesServices = {
       .select('*')
       .where('id', id)
       .del()
-      .returning(id);
+      .returning('*');
   }
 };
 
